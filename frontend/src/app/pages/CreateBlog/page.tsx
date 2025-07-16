@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 type formDataFormat = {
   author: string,
   title: string,
+  shortNote: string,
   content: string,
   image: string,
   publishedDate: string
@@ -21,6 +22,7 @@ const CreateBlog = () => {
   const [formData, setFormData] = useState<formDataFormat>({
     author: "",
     title: "",
+    shortNote: "",
     content: "",
     image: "",
     publishedDate: ""
@@ -51,35 +53,47 @@ const CreateBlog = () => {
   }
 
 
-  const handleSubmit = (e: React.FormEvent) => {
-    // console.log("Local Data :", data)
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    data.push(formData);
-    toast.success("🎉 Blog published successfully!", {
-      position: "top-right",
-      autoClose: 3000,
+    //data.push(formData); -> static
+
+    const response = await fetch("/api/blogs/post", {
+      method: "POST",
+      body: JSON.stringify(formData)
     });
+    const blogData = await response.json()
+    if (response.status === 201) {
+      toast.success("🎉 Blog published successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+      setFormData({
+        author: "",
+        title: "",
+        shortNote: "",
+        content: "",
+        image: "",
+        publishedDate: ""
+      })
+      console.log("Form Submitted :", formData)
 
-    setFormData({
-      author: "",
-      title: "",
-      content: "",
-      image: "",
-      publishedDate: ""
-    })
-    console.log("Form Submitted :", formData)
-
-    setTimeout(() => {
-      router.push('/');
-    }, 5000);
-
+      setTimeout(() => {
+        router.push('/');
+      }, 5000);
+    }
+    else {
+        toast.error(`${blogData.error}`, {
+        position: "top-right",
+        autoClose: 3000,
+      });
+    }
   }
 
   console.log(data)
 
 
   return (
-    <div className='h-screen w-screen bg-orange-100 flex flex-col items-center p-6 pt-32'>
+    <div className='min-h-screen w-screen bg-orange-100 flex flex-col items-center p-6 pt-32'>
       <ToastContainer />
       <h1 className='text-3xl font-bold mb-4'>Create A Blog</h1>
       <form className='bg-white p-6 rounded-lg shadow-md w-full max-w-md space-y-4' onSubmit={handleSubmit}>
@@ -107,6 +121,19 @@ const CreateBlog = () => {
             className='w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500'
             placeholder='e.g. Docker Simplified'
             value={formData.title}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div>
+          <label htmlFor='shortNote' className='block font-medium mb-1'>Short Note </label>
+          <textarea
+            id='shortNote'
+            name='shortNote'
+            rows={4}
+            className='w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500'
+            placeholder='Glimpse, should not exceed 100 characters...'
+            value={formData.shortNote}
             onChange={handleChange}
           />
         </div>

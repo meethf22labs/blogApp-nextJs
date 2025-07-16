@@ -1,54 +1,71 @@
 import React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import CardActionArea from '@mui/material/CardActionArea';
 import CardActions from '@mui/material/CardActions';
+import { CardMedia } from '@mui/material';
 import Link from "next/link";
 
-
-
 type BlogCardProps = {
-  postData: {
+  blog: {
     id: number;
     author: string;
     title: string;
-    content: string;
-    image: string;
+    shortNote: string;
     publishedDate: string;
   };
   index: number;
 };
 
-
-export default function BlogCard({ postData, index } : BlogCardProps) {
+export default function BlogCard({ blog }: BlogCardProps) {
   return (
-    <Card sx={{ maxWidth: 450, height: 400, width: 400 }} className='flex flex-col justify-between'>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-        //   height="80"
-          className="object-cover h-[200px]"
-          image="https://images.unsplash.com/photo-1526779259212-939e64788e3c?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZnJlZSUyMGltYWdlc3xlbnwwfHwwfHx8MA%3D%3D"
-          alt="Blog Image"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {postData.title}
-          </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            {postData.content}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Link href={`/pages/ReadBlog/${index}`}>
-        <Button size="small" color="primary">
-          Read More
-        </Button></Link>
+    <Card
+      sx={{
+        width: 400,
+        maxWidth: 400,
+        height: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        boxShadow: 3,
+        p: 2,
+        m: 1,
+        bgcolor: '#fff',
+      }}
+    >
+      <CardMedia
+    component="img"
+    className="object-cover h-[200px]"
+    image="https://images.unsplash.com/photo-1526779259212-939e64788e3c?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZnJlZSUyMGltYWdlc3xlbnwwfHwwfHx8MA%3D%3D"
+    alt="Blog Cover Image"
+  />
+  
+      <CardContent>
+        <Typography variant="h5" component="div" gutterBottom>
+          {blog.title}
+        </Typography>
+
+        <Typography variant="body2" color="text.secondary" gutterBottom>
+          {blog.shortNote}
+        </Typography>
+
+        <Typography variant="subtitle2" color="text.secondary">
+          📅 Published on: {blog.publishedDate}
+        </Typography>
+
+        <Typography variant="subtitle2" color="text.secondary">
+          ✍️ Author: {blog.author}
+        </Typography>
+      </CardContent>
+
+      <CardActions sx={{ justifyContent: 'flex-end' }}>
+        <Link href={`/pages/ReadBlog/${blog.id}`}>
+          <Button size="small" variant="contained" color="primary" >
+            Read More
+          </Button>
+        </Link>
       </CardActions>
     </Card>
-    );
+  );
 }
