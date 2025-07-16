@@ -79,7 +79,7 @@ const CreateBlog = () => {
 
 
   return (
-    <div className='h-screen w-screen bg-orange-100 flex flex-col items-center p-6'>
+    <div className='h-screen w-screen bg-orange-100 flex flex-col items-center p-6 pt-32'>
       <ToastContainer />
       <h1 className='text-3xl font-bold mb-4'>Create A Blog</h1>
       <form className='bg-white p-6 rounded-lg shadow-md w-full max-w-md space-y-4' onSubmit={handleSubmit}>

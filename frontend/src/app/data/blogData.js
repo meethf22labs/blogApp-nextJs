@@ -3,7 +3,7 @@ const blogPosts = [
     author: "Aisha Rao",
     title: "Docker Simplified",
     content: "Learn containerization with real-world apps.",
-    fullContent: "Docker makes it easier to develop and deploy applications across environments. This article walks through core concepts like containerization, Dockerfiles, volumes, and Compose setups for full-stack projects. You’ll gain practical insights into maintaining clean environments and integrating Docker into dev workflows.",
+    fullContent: "Docker makes it easier to develop and deploy applications across environments. This article walks through core concepts like containerization, Dockerfiles, volumes, and Compose setups for full-stack projects. You’ll gain practical insights into maintaining clean environments and integrating Docker into dev workflows.Docker makes it easier to develop and deploy applications across environments. This article walks through core concepts like containerization, Dockerfiles, volumes, and Compose setups for full-stack projects. You’ll gain practical insights into maintaining clean environments and integrating Docker into dev workflows.Docker makes it easier to develop and deploy applications across environments. This article walks through core concepts like containerization, Dockerfiles, volumes, and Compose setups for full-stack projects. You’ll gain practical insights into maintaining clean environments and integrating Docker into dev workflows.",
     image: "img/docker-basics.jpg",
     publishedDate: "2025-07-01"
   },

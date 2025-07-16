@@ -1,7 +1,7 @@
 import blogPosts from "@/app/data/blogData";
 import NavBar from "@/app/components/Navbar";
 
-export default function ReadBlog({ params }: { params: { id: string } }) {
+export default async function ReadBlog({ params }: { params: { id: string } }) {
   const postIndex = parseInt(params.id);
   const post = blogPosts[postIndex];
 
@@ -11,8 +11,7 @@ export default function ReadBlog({ params }: { params: { id: string } }) {
 
   return (
     <>
-    <NavBar/>
-    <div className="px-8 py-12 max-w-4xl mx-auto">
+    <div className="py-12 max-w-4xl mx-auto pt-32">
       <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
       <p className="text-sm text-gray-600 mb-2">
         By {post.author} • {post.publishedDate}
