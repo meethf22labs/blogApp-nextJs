@@ -1,8 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import BlogCard from '@/app/components/BlogCard';
-//import data from "../../data/blogData";
-
 
 type BlogPost = {
   id: number;
@@ -18,7 +16,6 @@ const HomePage = () => {
   const [postData, setPostData] = useState<BlogPost[]>([])
 
   useEffect(() => {
-    //setPostData(data) -> static
 
     const fetchData = async () => {
       const response = await fetch("/api/blogs/get");
@@ -29,7 +26,7 @@ const HomePage = () => {
         setPostData(blogData);
       } else {
         console.error("Unexpected response format:", blogData);
-        setPostData([]); // fallback to empty array
+        setPostData([]);
       }
     };
 
